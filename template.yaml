@@ -46,10 +46,41 @@ Resources:
         AllowOrigin: "'*'"
         MaxAge: "'600'"
         AllowCredentials: false
-      MethodSettings:
-        - ResourcePath: /autorizacion
-          HttpMethod: GET, OPTIONS  
+      Auth:
+        DefaultAuthorizer: MyCognitoAuthorizer
+        Authorizers:
+          MyCognitoAuthorizer:
+            AuthorizationScopes:
+              - email
+            UserPoolArn: arn:aws:cognito-idp:us-east-1:103504445265:userpool/us-east-1_FuqsrGyfj
+        AddDefaultAuthorizerToCorsPreflight: false
 
+  GatewayResponses:
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.Access-Control-Allow-Origin: "'Content-Type'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Method: "'OPTIONS,GET'"
+        gatewayresponse.header.Content-Type: "'application/json'"
+      ResponseType: UNAUTHORIZED
+      RestApiId: !Ref MyRestApi
+      StatusCode: '401'            
+      # MethodSettings:
+      #   - ResourcePath: /autorizacion
+      #     HttpMethod: GET
+
+  PetsModelNoFlatten:
+    Type: 'AWS::ApiGateway::Model'
+    Properties:
+      RestApiId: !Ref MyRestApi
+      ContentType: application/json
+      Description: Schema for Pets example
+      Name: PetsModelNoFlatten
+      Schema:
+        $schema: 'http://json-schema.org/draft-04/schema#'
+        title: PetsModelNoFlatten
+        type: object
 
  
 Outputs:
