@@ -59,8 +59,8 @@ Resources:
     Type: AWS::ApiGateway::GatewayResponse
     Properties:
       ResponseParameters:
-        gatewayresponse.header.Access-Control-Allow-Origin: "'Content-Type'"
-        gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+        gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type'"
         gatewayresponse.header.Access-Control-Allow-Method: "'OPTIONS,GET'"
         gatewayresponse.header.Content-Type: "'application/json'"
       ResponseType: UNAUTHORIZED
