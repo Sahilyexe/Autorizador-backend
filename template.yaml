@@ -32,9 +32,9 @@ Resources:
             Path: /autorizacion
             Method: GET
             RestApiId: 
-              Ref: MyRestApi
+              Ref: ApiAutorizer
 
-  MyRestApi:
+  ApiAutorizer:
     Type: AWS::Serverless::Api
     Properties:
       Description: A test API
@@ -64,16 +64,13 @@ Resources:
         gatewayresponse.header.Access-Control-Allow-Method: "'OPTIONS,GET'"
         gatewayresponse.header.Content-Type: "'application/json'"
       ResponseType: UNAUTHORIZED
-      RestApiId: !Ref MyRestApi
+      RestApiId: !Ref ApiAutorizer
       StatusCode: '401'            
-      # MethodSettings:
-      #   - ResourcePath: /autorizacion
-      #     HttpMethod: GET
 
   PetsModelNoFlatten:
     Type: 'AWS::ApiGateway::Model'
     Properties:
-      RestApiId: !Ref MyRestApi
+      RestApiId: !Ref ApiAutorizer
       ContentType: application/json
       Description: Schema for Pets example
       Name: PetsModelNoFlatten
@@ -94,27 +91,17 @@ Resources:
       UserAttributeUpdateSettings: 
         AttributesRequireVerificationBeforeUpdate: 
           - email
-      # Schema:
-      #   - AttributeDataType: String
-      #     Name: email
-      #     Required: true
+
 
   DomainForCognito: 
     Type: AWS::Cognito::UserPoolDomain
     Properties: 
-      # CustomDomainConfig: 
-      #   CustomDomainConfigType
       Domain: testpanama2
       UserPoolId: !Ref Userpool
 
-  Clietne: 
+  Cliente: 
     Type: AWS::Cognito::UserPoolClient
     Properties: 
-      # AccessTokenValidity: Integer
-      # AllowedOAuthFlows: 
-      #   - ALLOW_CUSTOM_AUTH
-      #   - ALLOW_REFRESH_TOKEN_AUTH
-      #   - ALLOW_USER_SRP_AUTH
       AllowedOAuthFlowsUserPoolClient: true
       AllowedOAuthScopes: 
         - email
@@ -134,4 +121,4 @@ Resources:
 Outputs:
   WebEndpoint:
     Description: "API Gateway endpoint URL for Prod stage"
-    Value: !Sub "https://${MyRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Value: !Sub "https://${ApiAutorizer}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
