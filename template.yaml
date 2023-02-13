@@ -52,7 +52,7 @@ Resources:
           MyCognitoAuthorizer:
             AuthorizationScopes:
               - email
-            UserPoolArn: arn:aws:cognito-idp:us-east-1:103504445265:userpool/us-east-1_FuqsrGyfj
+            UserPoolArn: !GetAtt Userpool.Arn
         AddDefaultAuthorizerToCorsPreflight: false
 
   GatewayResponses:
@@ -82,6 +82,54 @@ Resources:
         title: PetsModelNoFlatten
         type: object
 
+  Userpool:
+    Type: AWS::Cognito::UserPool
+    Properties: 
+      DeletionProtection: ACTIVE
+      UsernameAttributes: 
+        - email
+      UserPoolName: authentication-user-pool
+      AutoVerifiedAttributes:
+        - email
+      UserAttributeUpdateSettings: 
+        AttributesRequireVerificationBeforeUpdate: 
+          - email
+      # Schema:
+      #   - AttributeDataType: String
+      #     Name: email
+      #     Required: true
+
+  DomainForCognito: 
+    Type: AWS::Cognito::UserPoolDomain
+    Properties: 
+      # CustomDomainConfig: 
+      #   CustomDomainConfigType
+      Domain: testpanama2
+      UserPoolId: !Ref Userpool
+
+  Clietne: 
+    Type: AWS::Cognito::UserPoolClient
+    Properties: 
+      # AccessTokenValidity: Integer
+      # AllowedOAuthFlows: 
+      #   - ALLOW_CUSTOM_AUTH
+      #   - ALLOW_REFRESH_TOKEN_AUTH
+      #   - ALLOW_USER_SRP_AUTH
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthScopes: 
+        - email
+        - openid
+        - phone
+      CallbackURLs: 
+        - http://localhost:4200/callback
+      ClientName: cliente2
+      UserPoolId: !Ref Userpool
+      PreventUserExistenceErrors: ENABLED
+      SupportedIdentityProviders:
+        - COGNITO
+      AllowedOAuthFlows:
+        - implicit
+      
  
 Outputs:
   WebEndpoint:
