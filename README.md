@@ -2,6 +2,9 @@
 
 Este proyecto contiene los recursos necesarios para crear un sencillo backend de un servicio de inicio de sesión y registro de un usuario para acceder una aplicación. Los recursos son Amazon Cognito, ApiGateway y Lambda
 
+![Diagrama](/src/assets/img/Diagrama-autenticaci%C3%B3n.png)
+
+
 ## Pre-requisitos
 - Cuenta de AWS creada
 - AWS CLI instalado en tu equipo `https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html`
