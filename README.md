@@ -1,6 +1,6 @@
 # Autorizador-backkend
 
-Este proyecto contiene los recursos necesarios para crear un sencillo backend de un servicio de inicio de sesión y registro de un usuario para acceder una aplicación. Los recursos son Amazon Cognito, ApiGateway y Lambda
+Este proyecto contiene los recursos necesarios para crear un sencillo backend serverless y desacoplado de un servicio de inicio de sesión y registro de un usuario para acceder una aplicación. Los recursos son Amazon Cognito, ApiGateway y Lambda. 
 
 ## Pre-requisitos
 - Cuenta de AWS creada
