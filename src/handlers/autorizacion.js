@@ -20,7 +20,7 @@ exports.login = async (event) => {
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
       "Content-Type":'application/json'
     },
-    body: JSON.stringify('autenticado!')
+    body: JSON.stringify('autenticado!!')
   };
  
   console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
