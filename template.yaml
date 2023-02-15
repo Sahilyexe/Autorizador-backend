@@ -40,6 +40,8 @@ Resources:
       Description: A test API
       Name: Api-autorizer
       StageName: Prod
+      EndpointConfiguration:
+        Type: REGIONAL
       Cors:
         AllowMethods: "'GET, OPTIONS'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
@@ -82,7 +84,7 @@ Resources:
   Userpool:
     Type: AWS::Cognito::UserPool
     Properties: 
-      DeletionProtection: ACTIVE
+      # DeletionProtection: ACTIVE
       UsernameAttributes: 
         - email
       UserPoolName: authentication-user-pool
