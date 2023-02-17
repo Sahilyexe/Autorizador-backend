@@ -53,7 +53,7 @@ Resources:
         Authorizers:
           MyCognitoAuthorizer:
             AuthorizationScopes:
-              - email
+              - openid
             UserPoolArn: !GetAtt Userpool.Arn
         AddDefaultAuthorizerToCorsPreflight: false
 
@@ -241,7 +241,15 @@ Resources:
               color: white;
 
             }     
- 
+  Resourse:
+    Type: AWS::Cognito::UserPoolResourceServer
+    Properties: 
+      Identifier: https://${ApiAutorizer}.execute-api.${AWS::Region}.amazonaws.com
+      Name: recurso
+      Scopes: 
+        - openid
+      UserPoolId: !Ref Userpool
+
 Outputs:
   WebEndpoint:
     Description: "API Gateway endpoint URL for Prod stage"
