@@ -244,10 +244,11 @@ Resources:
   Resourse:
     Type: AWS::Cognito::UserPoolResourceServer
     Properties: 
-      Identifier: https://${ApiAutorizer}.execute-api.${AWS::Region}.amazonaws.com
+      Identifier: !Sub "https://${ApiAutorizer}.execute-api.${AWS::Region}.amazonaws.com"
       Name: recurso
-      Scopes: 
-        - openid
+      Scopes:
+        -  ScopeDescription: descripcion
+           ScopeName: openid
       UserPoolId: !Ref Userpool
 
 Outputs:
