@@ -253,5 +253,5 @@ Resources:
 
 Outputs:
   WebEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage"
+    Description: "url del endpoint del api que autoriza"
     Value: !Sub "https://${ApiAutorizer}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
